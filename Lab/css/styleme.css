@@ -1,0 +1,40 @@
+#body{
+    background: cadetblue;
+     font-family: Arial, "Arial Black", Verdana, "Trebuchet MS", Georgia, Tahoma, "Courier New", "Times New Roman";
+}
+
+#heading{
+    font-size: 1.5em;
+     font-weight: bold;
+}
+
+.definitionTerm{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: blue;
+}
+
+div::first-letter{
+    font-size: 1.5em;
+    color: blue;
+}
+
+a:link{
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+
+
+span {display:block}
+
+#transform{
+    transform: rotate(180deg);
+    
+    unicode-bidi:bidi-override;
+    direction:rtl;
+
+    
+}
+
