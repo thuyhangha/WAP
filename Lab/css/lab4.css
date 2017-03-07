@@ -1,0 +1,159 @@
+#outer {
+	border: 2px dashed black;
+	padding: 10px;
+}
+
+.box {
+	width: 100px;
+	height: 100px;
+	background-color: black;
+	margin: 10px;
+    float: left;
+}
+
+.box:nth-child(3n+1){
+    background: rebeccapurple;
+    clear: left;
+}
+
+.heading{
+ 	clear: left;
+}
+/*menu*/
+.menu ul{
+	background-color: red;
+	clear: left;
+}
+.menu li{
+    float: left;
+    border: 2px black solid;
+	list-style: none;
+	margin: 3px;
+	padding: 5px;
+}
+
+.header{
+ 	clear: left;
+	background-color: yellow;
+
+}
+
+.layout1{
+  background-color: lightgray;
+  overflow: hidden;
+  padding: 10px;
+  margin: 20px;
+  width: 500px;
+  clear: left;
+}
+
+.col:nth-child(1){
+	 float: left;
+	 width: 32%;
+}
+.col:nth-child(2){
+	 display: inline-block;
+	 width: 32%;
+	 border-right: 2px dotted #ccc;
+	 background-color: lightblue; 
+}
+.col:nth-child(3){
+	float: right;
+	width: 32%;
+	background-color: lightblue;
+}
+
+.container div{
+display: inline-block;
+border-left: 2px dotted #ccc;
+vertical-align: middle;
+} 
+
+#a1, #b1, #a2, #b2, #a3, #b3, #a4, #b4,#a5, #b5, #a6, #b6 {
+	width: 100px;
+	height: 100px;
+	font: 30pt bold Helvetica, Arial, sans-serif;
+	line-height: 100px;
+	text-align: center;
+}
+
+#a1 {
+	background-color: lightblue;
+	float: left;
+}
+
+#b1 {
+	background-color: pink;
+	float: right;
+}
+
+#c1 {
+	background-color: lightgray;
+}
+
+#a2 {
+	background-color: lightblue;
+	float: left;
+}
+
+#b2 {
+	background-color: pink;
+	float: right;
+	clear: left;
+}
+
+#c2 {
+	background-color: lightgray;
+}
+
+#a3 {
+	background-color: lightblue;
+	float: left;
+}
+
+#b3 {
+	background-color: pink;
+	float: right;
+	clear: left;
+}
+
+#c3 {
+	background-color: lightgray;
+	clear: left;
+}
+
+#a4 {
+	background-color: lightblue;
+	float: left;
+}
+
+#b4 {
+	background-color: pink;
+	float: right;
+	clear: left;
+}
+
+#c4 {
+  text-align: right;
+  width: 33%;
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+#a5 {
+	background-color: lightblue;
+	float: left;
+}
+
+#b5 {
+	background-color: pink;
+	float: right;
+	clear: left;
+}
+
+#c5 {
+  text-align: right;
+  width: 33%;
+  margin-left: auto;
+  margin-right: auto;
+} 
