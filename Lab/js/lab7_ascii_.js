@@ -14,28 +14,20 @@ window.onload = function(){
     var loopId = null;
     var frames = ANIMATIONS["blank"].split("=====\n");
     var index = 0;
-    var turbo = 250;
+    var speed = 250;
 
-    var myfontSize = {
-        Tiny: "7pt",
-        Small: "10pt",
-        Medium: "12pt",
-        Large: "16pt",
-        "Extra Large": "24pt",
-        XXL: "32pt"
-    }
     initialize();
 
     function initialize(){
+        //alert("onload");
         document.getElementById("start").onclick = start;
         document.getElementById("stop").onclick = stop;
-        document.getElementById("animation").onchange = animation;
-        document.getElementById("fontsize").onchange = size;
-        document.getElementById("turbo").onclick = speed;
-        document.getElementById("text-area").disabled = true;
+        document.getElementById("animation").onchange = changeAnimation;
+        document.getElementById("fontsize").onchange = changeSize;
+        document.getElementById("turbo").onclick = changeSpeed;
         disable(false);
+        document.getElementById("text-area").disabled = true;
     }
-
 
     function disable(value){
         document.getElementById("animation").disabled = value;
@@ -46,7 +38,7 @@ window.onload = function(){
     }
 
     function start(){
-        loopId = setInterval(frame, turbo);
+        loopId = setInterval(frame, speed);
         function frame(){
             if(index == frames.length) {
                 index = 0;
@@ -61,28 +53,19 @@ window.onload = function(){
         disable(false);
     }
 
-    function animation(){
-        var animationValue = document.getElementById("animation").value;
-        document.getElementById("text-area").value = ANIMATIONS[animationValue];
+    function changeAnimation(){
+        document.getElementById("text-area").value = ANIMATIONS["" + document.getElementById("animation").value];
         frames = document.getElementById("text-area").value.split("=====\n");
     }
 
-    function size(){
-        var fontsizeKey = document.getElementById("fontsize").value;
-        var fontsizeValue = "";
-        for(const key in myfontSize){
-            if(key ==fontsizeKey){
-                fontsizeValue = myfontSize[key];
-            }
-        }
-        document.getElementById("text-area").style.fontSize = fontsizeValue;
+    function changeSize(){
+        document.getElementById("text-area").style.fontSize = "" + document.getElementById("fontsize").value;
     }
 
-    function speed(){
+    function changeSpeed(){
+        speed = 250;
         if(document.getElementById("turbo").checked === true){
-            turbo = 50;
-        } else {
-            turbo = 250;
+            speed = 50;
         }
     }
 }
