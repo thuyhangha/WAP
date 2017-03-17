@@ -1,0 +1,113 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.Quiz;
+
+@WebServlet("/QuizServlet")
+public class QuizServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	public void generateUI(HttpServletResponse response, HttpSession session, int currentQuestion, int score, Quiz quiz)
+			throws IOException {
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		out.println("<h1>The Number Quiz</h1>");
+		out.println("<p>Your current score is " + score + ".</p>");
+		out.println("<p>Guess the next number in the sequence.</p>");
+		if (currentQuestion == quiz.getQuestions().length) {
+			out.println("<p>You have completed the Number Quiz, with a score of " + score + " out of "
+					+ quiz.getQuestions().length);
+			session.invalidate();
+		} else {
+			out.println(quiz.getQuestions()[currentQuestion]);
+			out.println("<form action='QuizServlet' method='post'>");
+			out.println("<p>Your answer: ");
+			out.println("<input type='text' name='answer' /> </p>");
+			out.println("<input type='submit' value='Submit' />");
+			out.println("</form>");
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		int indexQuestion = 0;
+		
+		int score = 0;
+		String currentQuestion = "";		
+		int attempt = 0;
+		
+		Quiz quiz = (Quiz) session.getAttribute("quiz");
+		if(quiz == null){
+			quiz = new Quiz();
+			
+			session.setAttribute("quiz", quiz);
+			session.setAttribute("indexQuestion", indexQuestion);
+			session.setAttribute("currentQuestion", quiz.getQuestions()[0]);
+			session.setAttribute("score", 0);
+			session.setAttribute("attempt", 0);
+			
+			RequestDispatcher dispatch = request.getRequestDispatcher("indexQuiz.jsp");
+			dispatch.forward(request, response);
+		} else {
+			if(request.getParameter("btnNext") != null) {
+				//update index for each request
+				indexQuestion = Integer.parseInt(session.getAttribute("indexQuestion").toString());
+				score = Integer.parseInt(session.getAttribute("score").toString());
+				attempt = Integer.parseInt(session.getAttribute("attempt").toString());
+				
+				if(indexQuestion < quiz.getAnswers().length){
+					int answer = 0;
+					if(request.getParameter("answer")!=null)
+						answer = Integer.parseInt(request.getParameter("answer"));
+					if(quiz.getAnswers()[indexQuestion] == answer){
+						session.setAttribute("score", score++);	
+						attempt = 0;
+					}
+					indexQuestion++;
+					
+					currentQuestion = quiz.getQuestions()[indexQuestion];
+					session.setAttribute("currentQuestion", currentQuestion);
+					
+					attempt++;
+					session.setAttribute("attempt", attempt);
+					if(attempt == 3){
+						//mess loi
+					}
+					
+					session.setAttribute("indexQuestion", indexQuestion);
+					RequestDispatcher dispatch = request.getRequestDispatcher("indexQuiz.jsp");
+					dispatch.forward(request, response);
+				}else {
+					//mess error
+				}
+				
+			} else if(request.getParameter("btnReset") != null) {
+				
+			} else if(request.getParameter("btnHint") != null) {
+				
+			}
+		}
+		
+		
+		
+		//generateUI(response, session, indexQuestion, score, quiz);
+	}
+
+}

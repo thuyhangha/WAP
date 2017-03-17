@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Simple Calculator</h1>
+	<form action="calculatorServlet" method="post">
+		<input type="text" name="number1"> + <input type="text" name="number2">
+		<input type="text" name="number3"> + <input type="text" name="number4">
+	</form>
+</body>
+</html>

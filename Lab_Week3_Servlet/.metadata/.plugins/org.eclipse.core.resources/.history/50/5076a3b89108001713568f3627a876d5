@@ -1,0 +1,14 @@
+package com.wap.calculator.util;
+
+/**
+ * 
+ * @author Rujuan(Tina) Xing
+ *
+ */
+public class Util {
+	
+	public static boolean isNumeric(String str){
+		return str.matches("(0|[1-9][0-9]*)");		
+	}
+
+}

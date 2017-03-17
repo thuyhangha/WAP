@@ -1,0 +1,119 @@
+package com.wap.calculator;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.wap.calculator.util.Util;
+
+/**
+ * 
+ * @author Rujuan(Tina) Xing
+ *
+ */
+@WebServlet("/CalculatorServlet")
+public class CalculatorServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public CalculatorServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String num1 = request.getParameter("num1");
+		String num2 = request.getParameter("num2");
+		String num3 = request.getParameter("num3");
+		String num4 = request.getParameter("num4");
+
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+
+		StringBuffer sb = new StringBuffer();
+		sb.append("<html><head><title>Insert title here</title></head><body>");
+		sb.append("<form action='CalculatorServlet' method='get'>");
+		if (Util.isNumeric(num1) && (Util.isNumeric(num2))) {
+			int sum = Integer.parseInt(num1) + Integer.parseInt(num2);
+			sb.append("<input type='text' name='num1' value='" + num1 + "'/>");
+			sb.append(" + ");
+			sb.append("<input type='text' name='num2' value='" + num2 + "'/>");
+			sb.append(" = ");
+			sb.append("<input type='text' name='sum' value='" + sum + "'/>");
+			sb.append("<br />");
+		} else {
+			sb.append("<input type='text' name='num1'/>");
+			sb.append(" + ");
+			sb.append("<input type='text' name='num2'/>");
+			sb.append(" = ");
+			sb.append("<input type='text' name='sum'/>");
+			sb.append("<br />");
+		}
+
+		if (Util.isNumeric(num3) && (Util.isNumeric(num4))) {
+			int multiply = Integer.parseInt(num3) * Integer.parseInt(num4);
+			sb.append("<input type='text' name='num3' value='" + num3 + "'/>");
+			sb.append(" * ");
+			sb.append("<input type='text' name='num4' value='" + num4 + "'/>");
+			sb.append(" = ");
+			sb.append("<input type='text' name='multiply' value='" + multiply + "'/>");
+			sb.append("<br />");
+		} else {
+			sb.append("<input type='text' name='num2'/>");
+			sb.append(" * ");
+			sb.append("<input type='text' name='num3'/>");
+			sb.append(" = ");
+			sb.append("<input type='text' name='multiply'/>");
+			sb.append("<br />");
+		}
+		sb.append("<input type='submit' value='Submit' />");
+		sb.append("</form></body></html>");
+		out.println(sb.toString());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String num1 = request.getParameter("num1");
+		String num2 = request.getParameter("num2");
+		String num3 = request.getParameter("num3");
+		String num4 = request.getParameter("num4");
+		boolean isParametersValid = false;
+
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
+		if (Util.isNumeric(num1) && (Util.isNumeric(num2))) {
+			isParametersValid = true;
+			int sum = Integer.parseInt(num1) + Integer.parseInt(num2);
+			out.println(num1 + " + " + num2 + " = " + sum);
+			out.println("<br />");
+		}
+
+		if (Util.isNumeric(num3) && (Util.isNumeric(num4))) {
+			isParametersValid = true;
+			int multiply = Integer.parseInt(num3) * Integer.parseInt(num4);
+			out.println(num3 + " * " + num4 + " = " + multiply);
+		}
+
+		if (!isParametersValid) {
+			response.sendRedirect("index.html");
+		}
+
+	}
+
+}

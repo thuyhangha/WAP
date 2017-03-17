@@ -54,34 +54,33 @@ function test_Lab6_5() {
 
 function test_Lab6_6() {
     var method = (function(){
-        var myCount = 0;
+        let myCount = 0;
         function changeBy(val) {
             myCount += val;
         };
         return {
             add: function () {
                 changeBy(1);
-                console.log("test");
             },
             reset: function () {
-                return 0;
+                myCount = 0;
             },
             value: function () {
                 return myCount;
             }
         }
     })();
-    method.add();
+    method.add(); method.add();
     console.log(method.value());
     method.reset();
     console.log(method.value());
 }
-
+test_Lab6_6()
 function test_Lab6_8() {
     function make_add(val) {
         var privateCounter = 0;
         const myVal = val;
-        return function changeBy() {
+        return function() {
             privateCounter += myVal;
             return privateCounter;
         }
